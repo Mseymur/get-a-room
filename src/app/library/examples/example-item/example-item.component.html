@@ -1,0 +1,12 @@
+<ion-item button>
+  <ion-avatar slot="start">
+    <ion-img [src]="'../assets/' + item.image"></ion-img>
+  </ion-avatar>
+  <ion-label class="ion-text-nowrap">
+    {{ item.title }}
+    <p>{{ item.subtitle }}</p>
+  </ion-label>
+  <ion-text slot="end">
+    {{ item.created | date: 'HH:mm' }}
+  </ion-text>
+</ion-item>

@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title>
+      Tab 2
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        Buttons with a custom design that is only for this component.
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" routerLink="/examples/tabs/tab1">To Tab 1</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" routerLink="/examples/tabs/tab3">To Tab 3</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <h3>Modal</h3>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button (click)="openExampleModal(1)">Open Modal Fullscreen</ion-button>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button (click)="openExampleModal(0.75)">Open Modal Breakpoint 0.75</ion-button>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button (click)="openExampleModal(0.5)">Open Modal Breakpoint 0.5</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <h3>Alert</h3>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button (click)="openAlert()">Open Alert</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <h3>Loading</h3>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button (click)="openLoader()">Open Loading</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

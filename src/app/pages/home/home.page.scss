@@ -1,0 +1,318 @@
+:host {
+  --fh-red: #e2001a;
+  --fh-red-dark: #c10017;
+  --fh-light-gray: #f8f9fa;
+  --fh-dark-gray: #333333;
+  --fh-border-color: #e0e0e0;
+  --fh-success: #28a745;
+  --fh-warning: #fd7e14;
+  --fh-info: #0d6efd;
+}
+
+ion-content {
+  --padding-bottom: 40px;
+}
+
+ion-toolbar {
+  --background: var(--fh-red);
+  --color: white;
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.app-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.schedule-container {
+  padding: 16px;
+}
+
+.room-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.room-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-left: 4px solid var(--fh-red);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.room-number {
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+}
+
+.card-divider {
+  height: 1px;
+  background-color: #e9ecef;
+  margin: 0;
+}
+
+.event-content {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.time {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+}
+
+.title {
+  font-size: 16px;
+  color: #000;
+  line-height: 1.4;
+}
+
+.no-events {
+  text-align: center;
+  padding: 32px;
+  color: #666;
+  
+  p {
+    margin: 0;
+    font-size: 1rem;
+  }
+}
+
+/* Building Header */
+.building-header {
+  background-color: white;
+  margin: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.building-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.university {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.building-code {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--fh-red);
+}
+
+.change-building-btn {
+  --border-radius: 8px;
+  height: 40px;
+  --border-color: var(--fh-red);
+  --color: var(--fh-red);
+}
+
+/* Filters Card */
+.filters-card {
+  background-color: white;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.filters-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.filters-row:last-child {
+  margin-bottom: 0;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.filter-action {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 4px;
+}
+
+.free-rooms-btn {
+  --border-radius: 8px;
+  height: 40px;
+  --background: var(--fh-red);
+  --color: white;
+}
+
+.filter-label {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* Section Headers */
+.section-header {
+  padding: 0 16px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    border-bottom: 3px solid var(--fh-red);
+    display: inline-block;
+    padding-bottom: 4px;
+  }
+}
+
+.time-indicator {
+  font-size: 16px;
+  font-weight: normal;
+  color: #666;
+}
+
+/* Class List */
+.classes-container {
+  padding: 0 16px;
+  padding-bottom: 32px;
+}
+
+.class-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.class-item {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--fh-red); // Default border is FH JOANNEUM red
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.room-code {
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.class-details {
+  padding: 16px 20px;
+}
+
+.class-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.class-time {
+  display: flex;
+  align-items: center;
+  color: #666;
+  font-size: 14px;
+  
+  ion-icon {
+    margin-right: 6px;
+    font-size: 16px;
+  }
+}
+
+.duration-info {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  
+  ion-icon {
+    margin-right: 6px;
+    font-size: 16px;
+  }
+}
+
+.no-events {
+  text-align: center;
+  padding: 32px;
+  color: #666;
+  background: white;
+  border-radius: 8px;
+  margin: 8px 0;
+  
+  p {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
+/* DateTime Button Styling */
+ion-datetime-button::part(native) {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  color: #333;
+  min-height: 40px;
+}
+
+/* Select Styling */
+ion-select {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --placeholder-color: #333;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  min-height: 40px;
+}
+
+/* Searchbar Styling */
+ion-searchbar {
+  --background: #f8f9fa;
+  --border-radius: 8px;
+  --color: #333;
+  --placeholder-color: #666;
+  --icon-color: #666;
+  --height: 40px;
+  padding: 0;
+}

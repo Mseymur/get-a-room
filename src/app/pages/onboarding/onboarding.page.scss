@@ -1,0 +1,200 @@
+:host {
+  --content-bg: #ffffff;
+  --light-bg: #f8f9fa;
+  --border-color: #e0e0e0;
+  --text-color: #333333;
+  --subtle-text-color: #666666;
+  --primary-color: var(--fh-red);
+  --primary-dark: var(--fh-red-dark);
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --border-radius-small: 8px;
+  --border-radius-medium: 12px;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+ ion-content {
+  --background: var(--light-bg);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+  justify-content: center;
+}
+
+.onboarding-container {
+  max-width: 500px;
+  width: 90%;
+  margin: 2em auto;
+  padding: 2.5em;
+  background-color: var(--content-bg);
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--box-shadow);
+  text-align: center;
+}
+
+#onboarding-header {
+  background-color: var(--primary-color);
+  margin: -2.5em -2.5em 2em -2.5em;
+  padding: 2em;
+  border-radius: var(--border-radius-medium) var(--border-radius-medium) 0 0;
+}
+
+#onboarding-header h1 {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 0.5em;
+}
+
+.welcome-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+.form-group {
+  margin-bottom: 1.8em;
+  text-align: left;
+}
+
+.form-group ion-label {
+  display: block;
+  margin-bottom: 0.8em;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.form-group ion-select, .form-group ion-input {
+  width: 100%;
+  padding: 0.9em 1.2em;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+  font-size: 1rem;
+  background-color: var(--light-bg);
+  transition: all 0.2s ease;
+  min-height: 48px;
+}
+
+.form-group ion-input[disabled] {
+  background-color: var(--light-bg);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+#setBuildingBtn {
+  width: 100%;
+  font-size: 1.05rem;
+  margin-top: 1.5em;
+  --background: var(--primary-color);
+  --background-activated: var(--primary-dark);
+  --background-hover: var(--primary-dark);
+  --border-radius: var(--border-radius-small);
+}
+
+.status-message {
+  margin-top: 1.5em;
+  padding: 1em;
+  border-radius: var(--border-radius-small);
+  text-align: center;
+  font-weight: 500;
+  background-color: rgba(211, 47, 47, 0.1);
+  color: var(--danger-color);
+  border: 1px solid rgba(211, 47, 47, 0.3);
+}
+
+.building-info {
+  margin-top: 1.5em;
+  padding: 1em;
+  background-color: var(--light-bg);
+  border-radius: var(--border-radius-small);
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--subtle-text-color);
+}
+
+.building-info h3 {
+  color: var(--text-color);
+  margin-bottom: 0.5em;
+  font-size: 1rem;
+}
+
+.building-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.building-info li {
+  margin-bottom: 0.3em;
+}
+
+.building-info li:last-child {
+  margin-bottom: 0;
+}
+
+ion-footer {
+  background-color: var(--content-bg);
+  padding: 1.5em;
+  text-align: center;
+}
+
+.footer-content {
+  p {
+    margin: 0.3em 0;
+    font-size: 0.85rem;
+    color: var(--subtle-text-color);
+  }
+}
+
+.footer-links {
+  a {
+    text-decoration: none;
+    color: var(--primary-color);
+  }
+  
+  .separator {
+    margin: 0 0.5em;
+    color: var(--subtle-text-color);
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .onboarding-container {
+    width: 95%;
+    margin: 1em auto;
+    padding: 1.5em;
+  }
+  
+  #onboarding-header {
+    margin: -1.5em -1.5em 1.5em -1.5em;
+    padding: 1.5em;
+  }
+  
+  #onboarding-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .welcome-text {
+    font-size: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5em;
+  }
+  
+  .form-group ion-select, .form-group ion-input {
+    padding: 1em;
+    font-size: 1rem;
+  }
+  
+  #setBuildingBtn {
+    padding: 1em;
+    font-size: 1rem;
+  }
+  
+  .building-info {
+    margin-top: 1.2em;
+    padding: 0.8em;
+  }
+}

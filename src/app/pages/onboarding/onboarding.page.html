@@ -1,0 +1,49 @@
+<ion-content>
+  <div class="onboarding-container">
+    <header id="onboarding-header">
+      <h1>Welcome to Get a Room</h1>
+      <p class="welcome-text">Select your building to view room schedules</p>
+    </header>
+
+    <div class="form-group">
+      <ion-label>Campus:</ion-label>
+      <ion-input value="FH JOANNEUM Graz" disabled></ion-input>
+  </div>
+
+    <div class="form-group">
+      <ion-label for="buildingSelector">Select Building:</ion-label>
+      <ion-select id="buildingSelector" [(ngModel)]="selectedBuilding" aria-label="Select building">
+        <ion-select-option value="AP152">AP152 - Alte Poststraße</ion-select-option>
+        <ion-select-option value="AP147">AP147 - Alte Poststraße</ion-select-option>
+        <ion-select-option value="AP149">AP149 - Alte Poststraße</ion-select-option>
+        <ion-select-option value="AP154">AP154 - Alte Poststraße</ion-select-option>
+        <ion-select-option value="EA11">EA11 - Eggenberger Allee</ion-select-option>
+        <ion-select-option value="EA9">EA9 - Eggenberger Allee</ion-select-option>
+        <ion-select-option value="EA13">EA13 - Eggenberger Allee</ion-select-option>
+        <ion-select-option value="ES30i">ES30i - Eckertstraße</ion-select-option>
+        <ion-select-option value="ES7a">ES7a - Eckertstraße</ion-select-option>
+        <ion-select-option value="ES7b">ES7b - Eckertstraße</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="building-info">
+      <h3>Building Information</h3>
+      <ul>
+        <li>AP - Alte Poststraße Campus</li>
+        <li>EA - Eggenberger Allee Campus</li>
+        <li>ES - Eckertstraße Campus</li>
+      </ul>
+    </div>
+
+    <ion-button id="setBuildingBtn" (click)="navigateToHome()" expand="block">
+      <ion-icon name="arrow-forward" slot="end"></ion-icon>
+      Continue to Schedule
+    </ion-button>
+
+    <div id="onboardingStatus" class="status-message" [style.display]="statusMessage ? 'block' : 'none'">
+      {{ statusMessage }}
+    </div>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>

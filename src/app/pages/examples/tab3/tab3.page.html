@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title>
+      Tab 3
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="full" routerLink="/examples/tabs/tab1">To Tab 1</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" routerLink="/examples/tabs/tab2">To Tab 2</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+
+      </ion-col>
+      <ion-col size="12">
+        <ion-segment [value]="segment" (ionChange)="setSegmentIndex($event)">
+          <ion-segment-button value="local">Local Comp.</ion-segment-button>
+          <ion-segment-button value="global">Global Comp.</ion-segment-button>
+        </ion-segment>
+      </ion-col>
+
+      @if (segment === 'local') {
+        <ion-col size="12">
+          @for (item of items; track item.id) {
+            <app-example-card [item]="item"></app-example-card>
+          }
+        </ion-col>
+      } @else {
+        <ion-col size="12">
+        @for (item of items; track item.id) {
+          <app-example-item [item]="item"></app-example-item>
+        }
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>

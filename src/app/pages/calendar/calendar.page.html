@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Calendar</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon name="qr-code-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-grid class="ion-no-margin ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-grid class="ion-no-margin ion-no-padding">
+              <ion-row>
+                <ion-col class="ion-justify-content-between ion-no-margin ion-no-padding" >
+                  <ion-card-title>AP.152.302</ion-card-title>
+                  <ion-card-subtitle>Atelier (CMS)</ion-card-subtitle>
+                </ion-col>
+                <ion-col>
+                  <ion-button class="lookup ion-float-right ion-no-margin ion-no-padding" fill="clear">
+                    <ion-icon slot="icon-only" name="create-outline" ></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text><b>Campus: </b>Graz - Eggenberg</ion-text> <br>
+            <ion-text><b>Building: </b>Alte Poststraße 152 (AP.152)</ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row  class="stretch-row">
+      <ion-col size="12">
+        <ion-card class="fillScreen">
+          <mbsc-eventcalendar
+            [view]="{ schedule: {
+                      type: 'day',
+                      startDay: 1,
+                      endDay:7,
+                      startTime: '07:00',
+                      endTime: '24:00',
+                      timeCellStep: 60,
+                      timeLabelStep: 60,
+                      currentTimeIndicator: true,
+                      }
+                    }"
+            [data]="[]">
+          </mbsc-eventcalendar>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title>
+      Tab 1
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        You can navigate to an other page by adding the "routerLink" attribute to any html tag (buttons, cards etc.).
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" routerLink="/examples/tabs/tab2">
+          To Tab 2
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" routerLink="/examples/tabs/tab3">
+          To Tab 3
+        </ion-button>
+      </ion-col>
+      <ion-col size="12">
+        <hr style="background: #999;" />
+        <ion-button (click)="authService.logout()">Logout</ion-button>
+      </ion-col>
+      <ion-col size="12">
+        <h3>Terminal</h3>
+        <hr style="background: #999;" />
+        <h4>Create new page</h4>
+        <pre>ionic g page PageName</pre>
+        <h4>Create new component</h4>
+        <pre>ionic g component ComponentName</pre>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <h3>Example pages</h3>
+        <ion-button size="small" routerLink="/example-names">
+          Names
+        </ion-button>
+        <ion-button size="small" routerLink="/example-offline-names">
+          Offline names
+        </ion-button>
+        <ion-button size="small" routerLink="/example-photos">
+          Photos
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,44 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Add here custom scss files for your global design */
+@import "theme/header";
+@import "theme/content";
+
+@import "@mobiscroll/angular/dist/css/mobiscroll.scss";
+
+.lookup{ // creates a look up (just icon, no border) button - use only on Buttons
+  width:48px;
+  height:48px;
+  margin-top:-16px;
+  margin-right:-16px;
+  color:rgb(38, 38, 38);
+}
+
+.fillScreen{ //makes an item stretch across the whole remaining space
+  flex:1;
+}

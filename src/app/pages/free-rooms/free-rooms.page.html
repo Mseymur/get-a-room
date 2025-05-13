@@ -1,0 +1,205 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="app-title">Get a Room</div>
+      <div class="app-subtitle">Free Rooms</div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-bottom">
+  <!-- Building Header Card -->
+  <div class="building-header">
+    <div class="building-info">
+      <div class="university">FH JOANNEUM Graz</div>
+      <div class="building-code">{{currentBuilding}}</div>
+    </div>
+    <ion-button fill="outline" color="primary" class="change-building-btn" (click)="navigateToOnboarding()">
+      <ion-icon name="pencil" slot="start"></ion-icon>
+      Change Building
+    </ion-button>
+  </div>
+
+  <!-- Filters Card -->
+  <div class="filters-card">
+    <!-- Row 1: Date, Time, and Search -->
+    <div class="filters-row">
+      <div class="filter-group date-time">
+        <div class="filter-label">Date:</div>
+        <ion-datetime-button datetime="date-picker"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime 
+              id="date-picker" 
+              [value]="date + 'T00:00:00.000Z'" 
+              presentation="date" 
+              (ionChange)="handleDateChange($event)">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </div>
+      
+      <div class="filter-group date-time">
+        <div class="filter-label">Time:</div>
+        <ion-datetime-button datetime="time-picker"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime 
+              id="time-picker" 
+              [value]="getISOTimeString()"
+              presentation="time" 
+              (ionChange)="handleTimeChange($event)">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </div>
+      
+      <div class="filter-group search">
+        <div class="filter-label">Search:</div>
+        <ion-searchbar [(ngModel)]="searchText" (ionChange)="onSearchChange()" placeholder="Search for rooms"></ion-searchbar>
+      </div>
+    </div>
+    
+    <!-- Row 2: Floor and Room -->
+    <div class="filters-row">
+      <div class="filter-group floor-room">
+        <div class="filter-label">Floor:</div>
+        <ion-select [(ngModel)]="selectedFloor" (ionChange)="onFloorChange($event)" interface="popover" placeholder="All Floors">
+          <ion-select-option value="all">All Floors</ion-select-option>
+          <ion-select-option *ngFor="let floor of getAvailableFloors()" [value]="floor">
+            {{getFloorLabel(floor)}}
+          </ion-select-option>
+        </ion-select>
+      </div>
+      
+      <div class="filter-group floor-room">
+        <div class="filter-label">Room:</div>
+        <ion-select [(ngModel)]="selectedRoom" (ionChange)="onRoomChange($event)" interface="popover" placeholder="All Rooms">
+          <ion-select-option value="all">All Rooms</ion-select-option>
+          <ion-select-option *ngFor="let room of getAvailableRooms()" [value]="room">
+            {{room}}
+          </ion-select-option>
+        </ion-select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Free Now Section -->
+  <div class="section-header">
+    <h2>Free Now <span class="time-indicator">at {{time}}</span></h2>
+  </div>
+
+  <div class="free-rooms-container">
+    <ng-container *ngIf="freeNowSlots.length > 0; else noFreeNow">
+      <div class="room-list">
+        <div *ngFor="let slot of getFreeNowSlotsPage()" class="room-item" (click)="openRoomSchedule(slot.room)">
+          <div class="room-code">{{slot.room}}</div>
+          <div class="time-range">{{formatTime(slot.start)}}–{{formatTime(slot.end)}}</div>
+          <div class="duration-badge">{{slot.duration}}</div>
+        </div>
+      </div>
+      <ion-button *ngIf="hasMoreFreeNow()" expand="block" fill="clear" (click)="loadMoreFreeNow()">
+        Show More ({{freeNowSlots.length - getFreeNowSlotsPage().length}} remaining)
+      </ion-button>
+    </ng-container>
+    <ng-template #noFreeNow>
+      <div class="no-events">
+        <p>No rooms available at {{time}}. Try a different time or date.</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Available Soon Section -->
+  <div class="section-header">
+    <h2>Available Soon <span class="time-indicator">after {{time}}</span></h2>
+  </div>
+
+  <div class="free-rooms-container">
+    <ng-container *ngIf="freeSoonSlots.length > 0; else noFreeSoon">
+      <div class="room-list">
+        <div *ngFor="let slot of getFreeSoonSlotsPage()" class="room-item" (click)="openRoomSchedule(slot.room)">
+          <div class="room-code">{{slot.room}}</div>
+          <div class="time-info">
+            <div class="time-range">{{formatTime(slot.start)}}–{{formatTime(slot.end)}}</div>
+            <div class="wait-time">Available in: {{calculateTimeUntilAvailable(slot.start)}}</div>
+          </div>
+          <div class="duration-badge soon">{{slot.duration}}</div>
+        </div>
+      </div>
+      <ion-button *ngIf="hasMoreFreeSoon()" expand="block" fill="clear" (click)="loadMoreFreeSoon()">
+        Show More ({{freeSoonSlots.length - getFreeSoonSlotsPage().length}} remaining)
+      </ion-button>
+    </ng-container>
+    <ng-template #noFreeSoon>
+      <div class="no-events">
+        <p>No rooms becoming available after {{time}}.</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Room Schedule Modal -->
+  <ion-modal #roomScheduleModal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Room Schedule</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content>
+        <div class="modal-content">
+          <div class="room-title">{{selectedRoomForModal}}</div>
+          <div class="modal-date">{{date | date:'EEEE, MMM d, y'}}</div>
+          
+          <div class="schedule-timeline">
+            <ng-container *ngIf="allTimeSlots.length > 0">
+              <div *ngFor="let slot of allTimeSlots" class="timeline-row">
+                <div class="time-column">
+                  <div class="time-start">{{formatTime(slot.start)}}</div>
+                  <div class="time-end">{{formatTime(slot.end)}}</div>
+                </div>
+                
+                <div class="content-column">
+                  <div class="event-card" [ngClass]="{'free-card': slot.isFree, 'booked-card': !slot.isFree}">
+                    <ng-container *ngIf="slot.isFree">
+                      <div class="card-title free-title">Free Room</div>
+                      <div class="card-time-range">{{formatTime(slot.start)}}–{{formatTime(slot.end)}}</div>
+                      <div class="card-duration">
+                        <ion-icon name="time-outline"></ion-icon> {{slot.duration}}
+                      </div>
+                    </ng-container>
+                    
+                    <ng-container *ngIf="!slot.isFree">
+                      <div class="card-title">{{slot.title}}</div>
+                      <div class="card-instructor" *ngIf="slot.instructor">{{slot.instructor}}</div>
+                      <div class="card-time-range">{{formatTime(slot.start)}}–{{formatTime(slot.end)}}</div>
+                      <div class="card-duration">
+                        <ion-icon name="time-outline"></ion-icon> {{slot.duration}}
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            
+            <ng-container *ngIf="allTimeSlots.length === 0">
+              <div class="no-events-modal">
+                <ion-icon name="calendar-clear-outline"></ion-icon>
+                <h3>Room is free all day</h3>
+                <p>There are no scheduled events for this room on {{date | date:'EEEE, MMMM d'}}.</p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content> 

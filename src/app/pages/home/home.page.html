@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <div class="app-title">Get a Room</div>
+      <div class="app-subtitle">Class Schedule</div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-bottom">
+  <!-- Building Header Card -->
+  <div class="building-header">
+    <div class="building-info">
+      <div class="university">FH JOANNEUM Graz</div>
+      <div class="building-code">{{currentBuilding}}</div>
+    </div>
+    <ion-button fill="outline" color="primary" class="change-building-btn" (click)="navigateToOnboarding()">
+      <ion-icon name="pencil" slot="start"></ion-icon>
+      Change Building
+      </ion-button>
+  </div>
+
+  <!-- Filters Card -->
+  <div class="filters-card">
+    <div class="filters-row">
+      <div class="filter-group">
+        <div class="filter-label">Date:</div>
+        <ion-datetime-button datetime="date-picker"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime 
+              id="date-picker" 
+              [value]="date" 
+              presentation="date" 
+              (ionChange)="handleDateChange($event)">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </div>
+      
+      <div class="filter-group">
+        <div class="filter-label">Floor:</div>
+        <ion-select [(ngModel)]="selectedFloor" (ionChange)="onFloorChange($event)" interface="popover" placeholder="All Floors">
+          <ion-select-option value="all">All Floors</ion-select-option>
+          <ion-select-option *ngFor="let floor of getAvailableFloors()" [value]="floor">
+            {{getFloorLabel(floor)}}
+          </ion-select-option>
+        </ion-select>
+      </div>
+      
+      <div class="filter-action">
+        <ion-button routerLink="/free-rooms" fill="solid" color="primary" class="free-rooms-btn">
+          <ion-icon name="cube-outline" slot="start"></ion-icon>
+          Free Rooms
+        </ion-button>
+      </div>
+    </div>
+    
+    <div class="filters-row">
+      <div class="filter-group">
+        <div class="filter-label">Room:</div>
+        <ion-select [(ngModel)]="selectedRoom" (ionChange)="onRoomChange($event)" interface="popover" placeholder="All Rooms">
+          <ion-select-option value="all">All Rooms</ion-select-option>
+          <ion-select-option *ngFor="let room of getAvailableRooms()" [value]="room">
+            {{room}}
+          </ion-select-option>
+        </ion-select>
+      </div>
+      
+      <div class="filter-group">
+        <div class="filter-label">Search:</div>
+        <ion-searchbar [(ngModel)]="searchText" placeholder="Search for classes or rooms"></ion-searchbar>
+      </div>
+    </div>
+  </div>
+
+  <!-- Classes Section -->
+  <div class="section-header">
+    <h2>Classes <span class="time-indicator">for {{date | date:'mediumDate'}}</span></h2>
+  </div>
+
+  <div class="classes-container">
+    <ng-container *ngIf="getFilteredEvents(currentEvents).length > 0; else noEvents">
+      <div class="class-list">
+        <div *ngFor="let event of getFilteredEvents(currentEvents)" class="class-item" [ngStyle]="{'border-left-color': event.color || '#e2001a'}">
+          <div class="room-code">{{event.tmp}}</div>
+          <div class="class-details">
+            <div class="class-title">{{event.title}}</div>
+            <div class="class-time">
+              <ion-icon name="time-outline"></ion-icon> {{formatTime(event.start)}}–{{formatTime(event.end)}}
+              <span class="duration-info">
+                <ion-icon name="hourglass-outline"></ion-icon> {{getDuration(event.start, event.end)}}
+              </span>
+            </div>
+      </div>
+    </div>
+      </div>
+    </ng-container>
+    <ng-template #noEvents>
+      <div class="no-events">
+        <p>No classes found for the selected date</p>
+      </div>
+    </ng-template>
+    </div>
+</ion-content>
+
+<style>
+.current-event {
+  border-left: 4px solid var(--ion-color-success);
+}
+
+.upcoming-event {
+  border-left: 4px solid var(--ion-color-warning);
+}
+
+.past-event {
+  border-left: 4px solid var(--ion-color-medium);
+  opacity: 0.8;
+}
+
+ion-card {
+  margin: 8px;
+}
+
+ion-card-content {
+  padding-top: 0;
+}
+
+ion-icon {
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+ion-badge {
+  padding: 8px;
+}
+
+ion-item-divider {
+  --background: var(--ion-color-light);
+  margin: 16px 0 8px 0;
+}
+
+ion-label[position="stacked"] {
+  margin-bottom: 8px;
+  color: var(--ion-color-medium);
+}
+
+.classes-container {
+  padding: 0 16px;
+  padding-bottom: 32px; /* Add bottom padding to create space */
+}
+</style>
